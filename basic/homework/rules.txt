@@ -1,0 +1,7 @@
+A simple dice game.
+3 players, each player has a name
+2 players are fair players and use only one dice.
+1 player is a cheater and uses 2 dices.
+Winner is the player who gets the biggest score.
+
+Create a game which shows the name of the winner
