@@ -1,0 +1,24 @@
+Same game as previously,
+but players are http clients.
+There is a server with the game, user names are known in advance.
+
+For simplification, user name goes as an argument of GET request.
+After the request user waits until the game is over and response contains game results.
+Game is over when all 3 users have sended requests.
+All users have 60 sec (default timeout) to make their turn since the first post.
+
+Note. Resource racing issue can be ignored for now
+
+Additional resources:
+https://golang.org/pkg/net/http/
+
+
+Rules from previous hw:
+
+A simple dice game.
+3 players, each player has a name
+2 players are fair players and use only one dice.
+1 player is a cheater and uses 2 dices.
+Winner is the player who gets the biggest score.
+
+Create a game which shows the name of the winner
