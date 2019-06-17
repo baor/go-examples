@@ -82,16 +82,6 @@ var simpleGame game
 func handlerPlay(w http.ResponseWriter, r *http.Request) {
 
 	name := r.FormValue("name")
-	// defer r.Body.Close()
-	// body, err := ioutil.ReadAll(r.Body)
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// req := playRequest{}
-	// if err := json.Unmarshal(body, &req); err != nil {
-	// 	panic(err)
-	// }
 
 	fmt.Printf("User %s does a turn\n", name)
 	simpleGame.OneTurn(name)
@@ -122,4 +112,8 @@ func main() {
 	s := http.Server{Addr: ":8080"}
 	http.HandleFunc("/play", handlerPlay)
 	fmt.Println(s.ListenAndServe())
+
+	//curl "http://localhost:8080/play?name=Player1"
+	//curl "http://localhost:8080/play?name=Player2"
+	//curl "http://localhost:8080/play?name=Cheater"
 }

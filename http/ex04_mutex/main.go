@@ -3,28 +3,28 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"sync/atomic"
+	"sync"
 )
 
-// Example of http server with asyncronus communitcation with atomic
+// Example of http server with asyncronus communitcation with mutex.
 
-var index *int64
+var mutex *sync.Mutex
+var index int
 
 func testHandler(w http.ResponseWriter, r *http.Request) {
 
-	value := atomic.LoadInt64(index)
-	value++
-	atomic.StoreInt64(index, value)
+	mutex.Lock()
+	index++
+	mutex.Unlock()
 
 	w.WriteHeader(200)
 	w.Write([]byte(fmt.Sprintf("Response from handler number %d", index)))
 }
 
 func main() {
-	initIndex := int64(0)
-	index = &initIndex
+	mutex = &sync.Mutex{}
 	s := http.Server{Addr: ":8080"}
-	http.HandleFunc("/test", testHandler)
+	http.HandleFunc("/test1", testHandler)
 	res := s.ListenAndServe()
 	fmt.Println(res)
 }
