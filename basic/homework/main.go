@@ -7,12 +7,10 @@ import (
 	"time"
 )
 
-// interfaces
 type diceThrower interface {
 	throw() int
 }
 
-// interfaces
 type nameSayer interface {
 	sayName() string
 }
