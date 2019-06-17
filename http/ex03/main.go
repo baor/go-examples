@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Example of http server with asyncronus communitcation and race detection
+// Example of http server with asyncronus communitcation, shared resource and race detection
 
 var index int
 
