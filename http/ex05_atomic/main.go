@@ -10,30 +10,20 @@ import (
 
 var index *int64
 
-func testHandlerPP(w http.ResponseWriter, r *http.Request) {
-
+func testHandler(w http.ResponseWriter, r *http.Request) {
 	value := atomic.LoadInt64(index)
 	value++
 	atomic.StoreInt64(index, value)
 
 	w.WriteHeader(200)
-	w.Write([]byte(fmt.Sprintf("Response from handler number %d", index)))
-}
-
-func testHandlerAdd(w http.ResponseWriter, r *http.Request) {
-
-	value := atomic.AddInt64(index, 1)
-	atomic.StoreInt64(index, value)
-
-	w.WriteHeader(200)
-	w.Write([]byte(fmt.Sprintf("Response from handler number %d", index)))
+	w.Write([]byte(fmt.Sprintf("Response from handler number %d", value)))
 }
 
 func main() {
 	initIndex := int64(0)
 	index = &initIndex
 	s := http.Server{Addr: ":8080"}
-	http.HandleFunc("/test", testHandlerPP)
+	http.HandleFunc("/test", testHandler)
 	res := s.ListenAndServe()
 	fmt.Println(res)
 }
